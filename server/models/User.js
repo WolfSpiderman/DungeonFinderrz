@@ -20,7 +20,7 @@ const userSchema = new Schema(
         },
         attendedGames: [{
             type: Schema.Types.ObjectId,
-            ref: 'Game'
+            ref: 'Request'
         }],
     },
     {
