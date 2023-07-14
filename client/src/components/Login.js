@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
 import AuthService from '../utils/auth';
+import { LOGIN_USER } from '../utils/mutations';
 
 function Login() {
   const [formState, setFormState] = useState({ email: '', password: '' });
+  const [login, { error }] = useMutation(LOGIN_USER);
 
   const handleFormSubmit = async event => {
+    // this part my change based on the mutations we created. 
+    // This is a generic template to handle the mutations
     event.preventDefault();
-    // We call the API here 
+    try {
+      const { data } = await login({
+        variables: { ...formState },
+      });
+
+      AuthService.login(data.login.token);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleChange = event => {
@@ -38,9 +51,9 @@ function Login() {
         />
         <input type="submit" value="Login" />
       </form>
+      {error && <div>Login failed</div>}
     </div>
   );
 }
 
 export default Login;
-
