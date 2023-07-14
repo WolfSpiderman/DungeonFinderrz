@@ -1,6 +1,7 @@
 // individual game page
 import { data } from "../fakeData";
 import { useParams } from "react-router-dom";
+import "../styles/GamePage.css"
 
 export default function GamePage() {
   const { gameId } = useParams();
@@ -10,8 +11,21 @@ export default function GamePage() {
 
   const gameList = data?.games || [];
   const gameInfo = gameList.find(game => game._id === gameId);
-  console.log(gameList);
-  console.log(gameInfo);
+
+  const handleOpenBtnClick = () => {
+    const modal = document.getElementById("request-modal");
+    modal.style.display = "block";
+  }
+
+  const handleCloseBtnClick = () => {
+    const modal = document.getElementById("request-modal");
+    modal.style.display = "none";
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  }
 
   return (
     <div>
@@ -27,6 +41,15 @@ export default function GamePage() {
           <p>{gameInfo.location}</p>
           <p>{gameInfo.date}</p>
           <p>{gameInfo.description}</p>
+
+          {/* pressing button will activate modal form */}
+          <button onClick={handleOpenBtnClick}>Request to Join Game</button>
+          <div id="request-modal" className="modal">
+            <div className="modal-content">
+              <span id="close-request-modal" className="close" onClick={handleCloseBtnClick}>&times;</span>
+              <p>modal!</p>
+            </div>
+          </div>
         </>
       ) : (
         <div>gameInfo not found </div>
