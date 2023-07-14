@@ -11,6 +11,7 @@ import ErrorPage from './pages/ErrorPage';
 import Home from './pages/Home';
 import GameList from './pages/GameList';
 import Profile from './pages/Profile';
+import GamePage from './pages/GamePage';
 
 const client = new ApolloClient({
   uri: '/graphql',
