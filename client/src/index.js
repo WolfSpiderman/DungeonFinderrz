@@ -4,12 +4,18 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom"
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import './index.css';
 import Root from './pages/Root';
 import ErrorPage from './pages/ErrorPage';
 import Home from './pages/Home';
 import GameList from './pages/GameList';
 import Profile from './pages/Profile';
+
+const client = new ApolloClient({
+  uri: '/graphql',
+  cache: new InMemoryCache(),
+});
 
 const router = createBrowserRouter([
   {
@@ -29,9 +35,13 @@ const router = createBrowserRouter([
             element: <GameList />
           },
           {
+            path: "games/:gameId",
+            element: <GamePage />,
+          },
+          {
             path: "profile",
             element: <Profile />
-          }
+          },
         ],
       },
     ],
@@ -41,7 +51,9 @@ const router = createBrowserRouter([
 ReactDOM
   .render(
     <React.StrictMode>
-      <RouterProvider router={router} />
+      <ApolloProvider client={client}>
+        <RouterProvider router={router} />
+      </ApolloProvider>
     </React.StrictMode>,
     document.getElementById('root')
   );
