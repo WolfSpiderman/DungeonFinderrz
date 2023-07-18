@@ -11,14 +11,6 @@ export default function Root(props) {
         <h1 style={{ fontSize: 72, color: "#a50308" }}>Dungeon Finderrz</h1>
       <nav style={{ alignSelf: "start" }}>
         <NavLink
-          to="/"
-          className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
-          }
-        >
-          Home
-        </NavLink>
-        <NavLink
           to="/games"
           className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "active" : ""

@@ -8,7 +8,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import './index.css';
 import Root from './pages/Root';
 import ErrorPage from './pages/ErrorPage';
-import Home from './pages/Home';
+import Home, { loader as homeLoader } from './pages/Home';
 import GameList from './pages/GameList';
 import Profile from './pages/Profile';
 import GamePage from './pages/GamePage';
@@ -29,7 +29,8 @@ const router = createBrowserRouter([
         children: [
           { 
             index: true, 
-            element: <Home />
+            element: <Home />,
+            loader: homeLoader,
           },
           {
             path: "games",
