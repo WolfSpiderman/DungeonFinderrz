@@ -1,6 +1,10 @@
 const { Schema, model } = require('mongoose');
 
 const requestSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     player: {
         type: String,
         required: true

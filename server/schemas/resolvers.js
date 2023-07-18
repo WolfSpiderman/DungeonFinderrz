@@ -5,7 +5,6 @@ const resolvers = {
         users: async () => {
             return await User.find({}).populate('requests')
         },
-
         games: async () => {
             return await Game.find({})
         },
