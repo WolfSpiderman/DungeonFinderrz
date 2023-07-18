@@ -1,4 +1,11 @@
 /* Root.css */
+a {
+    margin-right: 10px;
+}
+
+main {
+    min-height: 40vh;
+}
 
 header {
     display: flex;
@@ -35,24 +42,24 @@ header {
   }
   
 
-  footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-  
-    background-size: cover;
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+
+  background-size: cover;
+}
+
+footer a {
+  margin-right: 15px;
+  color: #a50308;
+  text-decoration: none;
+}
+
+@media (min-width: 992px) {
+  header, footer {
+    padding: 1rem 3rem;
   }
-  
-  footer a {
-    margin-right: 15px;
-    color: #a50308;
-    text-decoration: none;
-  }
-  
-  @media (min-width: 992px) {
-    header, footer {
-      padding: 1rem 3rem;
-    }
-  }
+}
