@@ -20,7 +20,7 @@ export default function GameList() {
           <ul>
             {gameList.map((game) => {
               return (
-                <GameCard id={game._id} title={game.title} location={game.location} date={game.date} slots={game.slots} />
+                <GameCard id={game._id} title={game.title} location={game.location} date={game.date} slots={game.slots} players={game.players}/>
               );
             })}
           </ul>

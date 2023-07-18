@@ -7,7 +7,7 @@ export default function GameCard(props) {
         <p>{props.title}</p>
         <p>{props.location}</p>
         <p>{props.date}</p>
-        <p>{props.slots}</p>
+        <p>Slots: {props.players.length}/{props.slots}</p>
       </a>
     </li>
   );
