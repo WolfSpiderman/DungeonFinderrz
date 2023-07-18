@@ -36,6 +36,9 @@ type User {
     users: [User]
     games: [Game]
     requests:[Request]
+    user(id: ID!): User
+    game(id: ID!): Game
+    request(id: ID!): Request
  }
 
  type Mutation {
