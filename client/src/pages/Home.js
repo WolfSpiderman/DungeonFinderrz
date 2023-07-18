@@ -17,9 +17,8 @@ export default function Home(props) {
   return (
     <div id="home-card">
       <div id="account-options">
-        <Link id="log-in">Log In</Link>
-        <span id="break">or</span>
-        <Link id="create-account">Create Account</Link>
+        <Login id="log-in"/>
+        <Signup id="create-account"/>
       </div>
       <div id="browse-link">
         <Link>Browse games without logging in</Link>

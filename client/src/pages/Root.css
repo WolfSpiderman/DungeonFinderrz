@@ -9,13 +9,11 @@ main {
 
 header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
     height: 200px;
- 
-    background-size: cover;
   }
   
   header h1 {
@@ -48,8 +46,6 @@ footer {
   justify-content: center;
   align-items: center;
   height: 200px;
-
-  background-size: cover;
 }
 
 footer a {
