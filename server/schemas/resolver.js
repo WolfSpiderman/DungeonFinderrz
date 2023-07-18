@@ -1,4 +1,4 @@
-const { User, Game, Requests } = require('../models');
+const { User, Game, Request } = require('../models');
 
 const resolvers = {
     Query: {
