@@ -1,7 +1,58 @@
-a {
-    margin-right: 10px;
-}
+/* Root.css */
 
-main {
-    min-height: 40vh;
-}
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    height: 200px;
+ 
+    background-size: cover;
+  }
+  
+  header h1 {
+    font-size: 72px;
+    color: #a50308;
+  }
+  
+  nav {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 20px;
+  }
+  
+  nav a {
+    margin: 0 15px;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  nav a.active {
+    color: #0056b3;
+  }
+  
+
+  footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  
+    background-size: cover;
+  }
+  
+  footer a {
+    margin-right: 15px;
+    color: #a50308;
+    text-decoration: none;
+  }
+  
+  @media (min-width: 992px) {
+    header, footer {
+      padding: 1rem 3rem;
+    }
+  }
