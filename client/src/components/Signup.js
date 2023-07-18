@@ -29,7 +29,7 @@ function Signup() {
   };
 
   return (
-    <div>
+    <div  className="signup-container">
       <form onSubmit={handleFormSubmit}>
         <label htmlFor="username">Username:</label>
         <input

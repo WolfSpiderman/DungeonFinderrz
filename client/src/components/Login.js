@@ -33,7 +33,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <form onSubmit={handleFormSubmit}>
         <label htmlFor="email">Email:</label>
         <input
