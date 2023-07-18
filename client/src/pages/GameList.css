@@ -1,0 +1,19 @@
+.GameList {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.gameList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80vw;
+    justify-content: space-around;
+    margin: 15px;
+}
+
+.gameCard {
+    margin: 15px 20px
+}
