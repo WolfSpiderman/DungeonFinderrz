@@ -1,5 +1,13 @@
-export default function Home(props) {
+import React from 'react';
+import Login from '../components/Login';
+import Signup from '../components/Signup';
+
+export default function Home() {
   return (
-    <h1>Dungeon Finderrz Home Page Mothafucka</h1>
-  )
+    <div>
+      <h1>Dungeon Finderrz Home Page</h1>
+      <Login />
+      <Signup />
+    </div>
+  );
 }
