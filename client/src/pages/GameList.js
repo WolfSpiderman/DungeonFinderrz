@@ -21,7 +21,7 @@ export default function GameList() {
           <ul className="gameList">
             {gameList.map((game) => {
               return (
-                <GameCard className="gameCard" id={game._id} title={game.title} location={game.location} date={game.date} slots={game.slots} />
+                <GameCard className="gameCard" id={game._id} title={game.title} location={game.location} date={game.date} slots={game.slots} players={game.players}/>
               );
             })}
           </ul>
