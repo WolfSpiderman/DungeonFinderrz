@@ -15,6 +15,9 @@ function Signup() {
       });
 
       AuthService.login(data.addUser.token);
+      const { token, user } = data.addUser;
+      console.log(user);
+      AuthService.login(token);
     } catch (e) {
       console.error(e);
     }
