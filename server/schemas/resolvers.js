@@ -46,6 +46,91 @@ const resolvers = {
     
           return { token, user };
         },
+        addRequest: async (_, { userId, gameId }) => {
+          try {
+            const user = await User.findById(userId);
+            const game = await Game.findById(gameId);
+    
+            if (!user) {
+              throw new Error('User not found');
+            }
+    
+            if (!game) {
+              throw new Error('Game not found');
+            }
+    
+            const request = new Request({
+              player: user.username,
+              role: 'Player',
+              approved: false,
+              game: [game],
+            });
+    
+            user.attendedGames.push(request);
+            await user.save();
+    
+            return request;
+          } catch (error) {
+            throw new Error(error.message);
+          }
+        },
+    
+        approveRequest: async (_, { userId, gameId }) => {
+          try {
+            const user = await User.findById(userId);
+            const game = await Game.findById(gameId);
+    
+            if (!user) {
+              throw new Error('User not found');
+            }
+    
+            if (!game) {
+              throw new Error('Game not found');
+            }
+    
+            const request = user.attendedGames.find((request) => request.game[0].toString() === gameId && !request.approved);
+    
+            if (!request) {
+              throw new Error('Request not found');
+            }
+    
+            request.approved = true;
+    
+            await user.save();
+    
+            return request;
+          } catch (error) {
+            throw new Error(error.message);
+          }
+        },
+    
+        denyRequest: async (_, { userId, gameId }) => {
+          try {
+            const user = await User.findById(userId);
+            const game = await Game.findById(gameId);
+    
+            if (!user) {
+              throw new Error('User not found');
+            }
+    
+            if (!game) {
+              throw new Error('Game not found');
+            }
+    
+            const request = user.attendedGames.find((request) => request.game[0].toString() === gameId && !request.approved);
+    
+            if (!request) {
+              throw new Error('Request not found');
+            }
+    
+            await request.remove();
+            await user.save();
+    
+            return request;
+          } catch (error) {
+            throw new Error(error.message);
+          }
+        },
       }
 };
 
