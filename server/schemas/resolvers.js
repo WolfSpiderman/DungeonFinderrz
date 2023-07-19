@@ -1,4 +1,6 @@
 const { User, Game, Request } = require('../models');
+const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require('apollo-server-express');
 
 const resolvers = {
     Query: {
@@ -8,14 +10,12 @@ const resolvers = {
         user: async (parent, { id }) => {
           return await User.findById(id).populate('requests')
         },
-
         games: async () => {
           return await Game.find({})
         },
         game: async (parent, { id }) => {
           return await Game.findById(id)
         },        
-
         requests: async () => {
           return await Request.find({}).populate('games')
         },
