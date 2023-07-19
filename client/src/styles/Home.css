@@ -1,0 +1,13 @@
+#home-card {
+  text-align: center;
+}
+
+#account-options {
+  margin-bottom: 50px;
+}
+
+#log-in,
+#break,
+#create-account {
+  display: block;
+}
