@@ -3,13 +3,24 @@ const { User, Game, Request } = require('../models');
 const resolvers = {
     Query: {
         users: async () => {
-            return await User.find({}).populate('requests')
+          return await User.find({}).populate('requests')
         },
+        user: async (parent, { id }) => {
+          return await User.findById(id).populate('requests')
+        },
+
         games: async () => {
-            return await Game.find({})
+          return await Game.find({})
         },
+        game: async (parent, { id }) => {
+          return await Game.findById(id)
+        },        
+
         requests: async () => {
-            return await Request.find({}).populate('games')
+          return await Request.find({}).populate('games')
+        },
+        request: async (parent, { id }) => {
+          return await Request.findById(id).populate('games')
         }
     },
     Mutation: {
