@@ -8,7 +8,7 @@ type Auth {
 
 type User {
     _id: ID!
-    userName: String!
+    username: String!
     email: String!
     password: String!
     attendedGames: [Request]

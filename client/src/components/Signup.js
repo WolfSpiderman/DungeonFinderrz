@@ -15,6 +15,9 @@ function Signup() {
       });
 
       AuthService.login(data.addUser.token);
+      const { token, user } = data.addUser;
+      console.log(user);
+      AuthService.login(token);
     } catch (e) {
       console.error(e);
     }
@@ -34,7 +37,6 @@ function Signup() {
         <label htmlFor="username">Username:</label>
         <input
           type="text"
-          id="username"
           name="username"
           onChange={handleChange}
           value={formState.username}
@@ -42,7 +44,6 @@ function Signup() {
         <label htmlFor="email">Email:</label>
         <input
           type="email"
-          id="email"
           name="email"
           onChange={handleChange}
           value={formState.email}
@@ -50,7 +51,6 @@ function Signup() {
         <label htmlFor="password">Password:</label>
         <input
           type="password"
-          id="password"
           name="password"
           onChange={handleChange}
           value={formState.password}

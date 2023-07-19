@@ -1,42 +1,34 @@
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const User = require('../models/User'); 
 
-exports.register = async (req, res) => {
-  const { username, password } = req.body;
+// set token secret and expiration date
+const secret = 'mysecretsshhhhh';
+const expiration = '2h';
 
-  const userExists = await User.findOne({ username });
-  if (userExists) return res.status(400).json({ error: 'Username already exists' });
+module.exports = {
+  // function for our authenticated routes
+  authMiddleware: function ({ req }) {
+    let token = req.body.token || req.query.token || req.headers.authorization;
 
- 
-  const hashedPassword = await bcrypt.hash(password, 10);
+    if (req.headers.authorization) {
+      token = token.split(' ').pop().trim();
+    }
 
+    if (!token) {
+      return req;
+    }
 
-  const user = new User({
-    username,
-    password: hashedPassword,
-  });
+    try {
+      const { data } = jwt.verify(token, secret, { maxAge: expiration });
+      req.user = data;
+    } catch {
+      console.log('Invalid token');
+    }
 
-  await user.save();
+    return req;
+  },
+  signToken: function ({ username, email, _id }) {
+    const payload = { username, email, _id };
 
-  
-  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
-
-  res.json({ token });
-};
-
-exports.login = async (req, res) => {
-  const { username, password } = req.body;
-
-
-  const user = await User.findOne({ username });
-  if (!user) return res.status(400).json({ error: 'Invalid username or password' });
-
-  const validPassword = await bcrypt.compare(password, user.password);
-  if (!validPassword) return res.status(400).json({ error: 'Invalid username or password' });
-
- 
-  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
-
-  res.json({ token });
+    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+  },
 };

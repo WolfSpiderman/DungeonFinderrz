@@ -2,32 +2,40 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
-    {
-        username: {
-            type: String,
-            required: true,
-            unique: true,
-        },
-        email: {
-            type: String,
-            required: true,
-            unique: true,
-            match: [/.+@.+\..+/, 'Must use a valid email address']
-        },
-        password: {
-            type: String,
-            required: true
-        },
-        attendedGames: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Request'
-        }],
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    {
-        toJSON: {
-            virtuals: true
-        }
-    }
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+@.+\..+/, 'Must use a valid email address'],
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    attendedGames: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Request',
+      },
+    ],
+    reliabilityRating: {
+      type: Number,
+      min: 0,
+      max: 5,
+      default: 0,
+    },
+  },
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  }
 );
 
 userSchema.pre('save', async function (next) {
