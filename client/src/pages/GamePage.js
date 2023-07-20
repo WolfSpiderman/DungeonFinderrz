@@ -1,13 +1,18 @@
 // individual game page
-import { data } from "../fakeData";
+// import { data } from "../fakeData";
 import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { QUERY_GAME } from "../utils/queries";
 import "../styles/GamePage.css"
 
 export default function GamePage() {
   const { gameId } = useParams();
 
   // query to be used once server is set up, along with mutations and queries utils
-  // const { loading, data } = useQuery(QUERY_GAMES);
+  const { loading, data } = useQuery(QUERY_GAME,
+    {
+      variables: { gameId }
+  });
 
   const gameList = data?.games || [];
   const gameInfo = gameList.find(game => game._id === gameId);

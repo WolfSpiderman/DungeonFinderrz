@@ -1,0 +1,34 @@
+[
+  {
+    "title": "game 1",
+    "location": "St. Peters",
+    "description": "5e narrative campaign",
+    "maxPlayers": 5,
+    "players": [
+      "5e1a0651741b255ddda996c1", 
+      "5e1a0651741b255ddda996c2"
+    ],
+    "date": "08/01/2023"
+  },
+  {
+    "title": "game 2",
+    "location": "St. Louis",
+    "description": "1st edition throwback",
+    "maxPlayers": 3,
+    "players": [
+      "5e1a0651741b255ddda996c4",
+      "5e1a0651741b255ddda996c5"
+    ],
+    "date": "08/07/2023"
+  },
+  {
+    "title": "game 3",
+    "location": "Springfield",
+    "description": "One off goblin slaughterfest",
+    "maxPlayers": 4,
+    "players": [
+      "5e1a0651741b255ddda996c2"
+    ],
+    "date": "08/06/2023"
+  }
+]

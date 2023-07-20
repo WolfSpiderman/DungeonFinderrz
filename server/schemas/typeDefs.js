@@ -20,8 +20,9 @@ type User {
     title: String!
     location: String!
     description: String
-    totalPlayers: Int!
-    players: Int
+    maxPlayers: Int!
+    players: [User]
+    date: String
  }
 
  type Request {

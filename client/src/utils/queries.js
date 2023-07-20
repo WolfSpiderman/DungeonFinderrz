@@ -26,10 +26,13 @@ export const QUERY_GAMES = gql`
     query GetAllGames {
         games {
             _id
+            title
             location
             description
-            totalPlayers
-            players
+            maxPlayers
+            players {
+                _id
+            }
         }
     }
 `;
@@ -38,10 +41,13 @@ export const QUERY_GAME = gql`
     query GetGame($gameId: ID!) {
         game(gameId: $gameId) {
             _id
+            title
             location
             description
-            totalPlayers
-            players
+            maxPlayers
+            players {
+                _id
+            }
         }
     }
 `;

@@ -2,6 +2,10 @@ const { Schema, model } = require('mongoose');
 
 const gameSchema = new Schema(
     {
+        title: {
+            type: String,
+            required: true,
+        },
         location: {
             type: String,
             required: true,
@@ -9,15 +13,16 @@ const gameSchema = new Schema(
         description: {
             type: String,
         },
-        totalPlayers: {
+        maxPlayers: {
             type: Number,
             required: true,
         },
         players: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Request',
-                autopopulate: { select: 'name', match: { approved: true } },
+                // type: String,
+                ref: 'User',
+                autopopulate: true,
             },
         ],
         requests: [
