@@ -13,6 +13,16 @@ const requestSchema = new Schema({
         type: Boolean,
         default: null
     },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    gameId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Game',
+        required: true
+    },
     game: {
         type: String,
         required: true
