@@ -46,11 +46,13 @@ const resolvers = {
     
           return { token, user };
         },
-        addRequest: async (_, { userId, gameId }) => {
+        addRequest: async (parent, { userId, gameId, role }) => {
           try {
             const user = await User.findById(userId);
             const game = await Game.findById(gameId);
     
+            console.log(user);
+            console.log(game);
             if (!user) {
               throw new Error('User not found');
             }
@@ -59,23 +61,25 @@ const resolvers = {
               throw new Error('Game not found');
             }
     
-            const request = new Request({
+            const request = Request.create({
               player: user.username,
-              role: 'Player',
-              approved: false,
-              game: [game],
+              role: role,
+              approved: null,
+              game: game.title
             });
     
-            user.attendedGames.push(request);
+            user.attendedGames.push(request._id);
             await user.save();
+
+            game.requests.push(request._id);
+            await game.save();
     
             return request;
           } catch (error) {
             throw new Error(error.message);
           }
         },
-    
-        approveRequest: async (_, { userId, gameId }) => {
+        approveRequest: async (parent, { userId, gameId }) => {
           try {
             const user = await User.findById(userId);
             const game = await Game.findById(gameId);
@@ -104,7 +108,7 @@ const resolvers = {
           }
         },
     
-        denyRequest: async (_, { userId, gameId }) => {
+        denyRequest: async (parent, { userId, gameId }) => {
           try {
             const user = await User.findById(userId);
             const game = await Game.findById(gameId);
@@ -131,6 +135,29 @@ const resolvers = {
             throw new Error(error.message);
           }
         },
+        addGame: (parent, { title, location, description, date, totalPlayers }) => {
+          const newGame = Game.create({
+            title,
+            location,
+            description,
+            date,
+            totalPlayers,
+            players: [],
+            requests: [],
+            slots: 0
+          });
+    
+          return newGame;
+        },
+        removeGame: async (parent, { id }) => {
+          const game = await Game.findByIdAndDelete(id);
+
+          if (!game) {
+            throw new Error('No game found with this id');
+          }
+
+          return game;
+        }
       }
 };
 

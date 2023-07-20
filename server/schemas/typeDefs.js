@@ -13,6 +13,7 @@ type User {
     password: String!
     attendedGames: [Request]
     reliabilityRating: Float
+    gameCount: Int
 }
  
  type Game {
@@ -21,7 +22,10 @@ type User {
     location: String!
     description: String
     totalPlayers: Int!
-    players: Int
+    players: [Request]
+    requests: [Request]
+    date: String
+    slots: Int
  }
 
  type Request {
@@ -29,7 +33,7 @@ type User {
     player: String!
     role: String!
     approved: Boolean
-    game:[Game]
+    game: String!
  }
 
  type Query {
@@ -44,9 +48,9 @@ type User {
  type Mutation {
    addUser(username: String!, email: String!, password: String!): Auth
    login(email: String!, password: String!): Auth
-   addGame(title: String!): Game
+   addGame(title: String!, location: String!, description: String, date: String!, totalPlayers: Int!): Game
    removeGame(_id: ID!): Game
-   addRequest(userId: ID!, gameID: ID!): Request
+   addRequest(userId: ID!, gameId: ID!, role: String!): Request
    approveRequest(userId: ID!, gameId: ID!): Request
    denyRequest(userId: ID!, gameId: ID!): Request
    updateProfile: Auth
