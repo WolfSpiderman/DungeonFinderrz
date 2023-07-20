@@ -131,7 +131,40 @@ const resolvers = {
             throw new Error(error.message);
           }
         },
-      }
+      },
+    Auth: {
+      user: async (parent, args, context) => {
+        // Ensure the user is authenticated before allowing access to user data.
+        if (!context.user) {
+          throw new Error('Not authenticated');
+        }
+  
+        try {
+          // Fetch the user data using the user ID stored in the Auth token.
+          const user = await User.findById(context.user._id);
+          return user;
+        } catch (error) {
+          throw new Error('Unable to fetch user data');
+        }
+      },
+    },
+    User: {
+      attendedGames: async (parent) => {
+        try {
+          // Fetch the user's attended games and populate the 'requests' field.
+          const user = await User.findById(parent._id).populate('requests');
+          
+          // Return the 'requests' field 
+          if (user) {
+            return user.requests;
+          }
+          return [];
+        } catch (error) {
+          throw new Error('Unable to fetch attended games');
+        }
+      },
+    },
+    /
 };
 
 module.exports = resolvers;

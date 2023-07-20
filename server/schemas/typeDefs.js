@@ -4,7 +4,7 @@ const typeDefs = gql `
 type Auth {
     token: ID!
     user: User
-  }
+  } 
 
 type User {
     _id: ID!
@@ -12,16 +12,17 @@ type User {
     email: String!
     password: String!
     attendedGames: [Request]
-    reliabilityRating: Float
+    reliabilityRating: Int
 }
  
  type Game {
     _id: ID!
-    title: String!
     location: String!
     description: String
     totalPlayers: Int!
-    players: Int
+    players: [Request]
+    requests: [Request]
+    date: String
  }
 
  type Request {
@@ -30,6 +31,7 @@ type User {
     role: String!
     approved: Boolean
     game:[Game]
+    user:[User]
  }
 
  type Query {
