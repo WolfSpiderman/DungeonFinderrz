@@ -158,7 +158,25 @@ const resolvers = {
 
           return game;
         }
-      }
+      },
+      User: {
+        attendedGames: async (parent) => {
+          try {
+            // Fetch the user's attended games and populate the 'requests' field.
+            const user = await User.findById(parent._id).populate('requests');
+            
+            // Return the 'requests' field 
+            if (user) {
+              return user.requests;
+            }
+            return [];
+          } catch (error) {
+            throw new Error('Unable to fetch attended games');
+          }
+        },
+      },
+      /
+  };
 };
 
 module.exports = resolvers;
