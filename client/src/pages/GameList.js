@@ -88,12 +88,12 @@ export default function GameList() {
                   <label htmlFor="gameName">Game Name:</label>
                   <input
                     type="text"
-                    id="gameName"
-                    value={formValues.gameName}
+                    id="title"
+                    value={formValues.title}
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,
-                        gameName: e.target.value,
+                        title: e.target.value,
                       })
                     }
                   />
