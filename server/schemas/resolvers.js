@@ -69,9 +69,9 @@ const resolvers = {
               gameId: gameId,
               userId: userId
             });
-    
-            user.attendedGames.push((await request).id);
-            await user.save();
+
+            // user.attendedGames.push(request._id);
+            // await user.save();
 
             game.requests.push((await request)._id);
             await game.save();
