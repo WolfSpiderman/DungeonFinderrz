@@ -57,3 +57,24 @@
   padding: 8px 16px;
   margin-left: 8px;
 }
+
+.gameModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    background-color: white;
+    width: 400px; /* adjust the width as desired */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.show-modal {
+  display: block;
+}
+
+.hide-modal {
+    display: none;
+}
