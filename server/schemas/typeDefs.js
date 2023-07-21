@@ -33,6 +33,8 @@ type User {
     player: String!
     role: String!
     approved: Boolean
+    gameId: ID!
+    userId: ID!
     game: String!
  }
 
@@ -51,8 +53,8 @@ type User {
    addGame(title: String!, location: String!, description: String, date: String!, totalPlayers: Int!): Game
    removeGame(_id: ID!): Game
    addRequest(userId: ID!, gameId: ID!, role: String!): Request
-   approveRequest(userId: ID!, gameId: ID!): Request
-   denyRequest(userId: ID!, gameId: ID!): Request
+   approveRequest(requestId: ID!): Request
+   denyRequest(requestId: ID!): Request
    updateProfile: Auth
  }
 `

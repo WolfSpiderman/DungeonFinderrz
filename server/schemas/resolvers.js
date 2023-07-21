@@ -17,7 +17,7 @@ const resolvers = {
           return await Game.findById(id)
         },        
         requests: async () => {
-          return await Request.find({}).populate('games')
+          return await Request.find({})
         },
         request: async (parent, { id }) => {
           return await Request.findById(id).populate('games')
@@ -65,13 +65,15 @@ const resolvers = {
               player: user.username,
               role: role,
               approved: null,
-              game: game.title
+              game: game.title,
+              gameId: gameId,
+              userId: userId
             });
-    
+
             // user.attendedGames.push(request._id);
             // await user.save();
 
-            game.requests.push(request._id);
+            game.requests.push((await request)._id);
             await game.save();
     
             return request;
@@ -79,56 +81,66 @@ const resolvers = {
             throw new Error(error.message);
           }
         },
-        approveRequest: async (parent, { userId, gameId }) => {
+        approveRequest: async (parent, { requestId }) => {
           try {
-            const user = await User.findById(userId);
-            const game = await Game.findById(gameId);
-    
-            if (!user) {
-              throw new Error('User not found');
-            }
-    
-            if (!game) {
-              throw new Error('Game not found');
-            }
-    
-            const request = user.attendedGames.find((request) => request.game[0].toString() === gameId && !request.approved);
-    
+            const request = await Request.findById(requestId);
+        
             if (!request) {
               throw new Error('Request not found');
             }
-    
+        
+            if (request.approved) {
+              throw new Error('Request has already been approved');
+            }
+        
             request.approved = true;
-    
-            await user.save();
-    
+            
+            const user = await User.findById(request.userId);
+            const game = await Game.findById(request.gameId);
+        
+            if (!user) {
+              throw new Error('User not found');
+            }
+        
+            if (!game) {
+              throw new Error('Game not found');
+            }
+        
+            game.players.push(user._id);
+        
+            await Promise.all([request.save(), game.save()]);
+        
             return request;
           } catch (error) {
             throw new Error(error.message);
           }
         },
-    
-        denyRequest: async (parent, { userId, gameId }) => {
+        denyRequest: async (parent, { requestId }) => {
           try {
-            const user = await User.findById(userId);
-            const game = await Game.findById(gameId);
-    
-            if (!user) {
-              throw new Error('User not found');
-            }
-    
-            if (!game) {
-              throw new Error('Game not found');
-            }
-    
-            const request = user.attendedGames.find((request) => request.game[0].toString() === gameId && !request.approved);
+            const request = await Request.findById(requestId);
     
             if (!request) {
               throw new Error('Request not found');
             }
     
-            await request.remove();
-            await user.save();
+            request.approved = false;
+    
+            const user = await User.findById(request.userId);
+            const game = await Game.findById(request.gameId);
+
+            if (!user) {
+              throw new Error('User not found!');
+            }
+
+            if (!game) {
+              throw new Error('Game not found!');
+            }
+
+            user.attendedGames = user.attendedGames.filter((gameId) => gameId !== request.gameId);
+
+            game.requests = game.requests.filter((reqId) => reqId !== request._id);
+
+            await Promise.all([request.save(), user.save(), game.save()])
     
             return request;
           } catch (error) {
@@ -158,7 +170,25 @@ const resolvers = {
 
           return game;
         }
-      }
-};
+      },
+      User: {
+        attendedGames: async (parent) => {
+          try {
+            // Fetch the user's attended games and populate the 'requests' field.
+            const user = await User.findById(parent._id).populate('requests');
+            
+            // Return the 'requests' field 
+            if (user) {
+              return user.requests;
+            }
+            return [];
+          } catch (error) {
+            throw new Error('Unable to fetch attended games');
+          }
+        },
+      },
+      
+  };
+
 
 module.exports = resolvers;
