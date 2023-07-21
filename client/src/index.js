@@ -12,10 +12,16 @@ import Home, { loader as homeLoader } from './pages/Home';
 import GameList from './pages/GameList';
 import Profile from './pages/Profile';
 import GamePage from './pages/GamePage';
+import Auth from './utils/auth';
+
+const token = Auth.getToken() || null;
 
 const client = new ApolloClient({
   uri: '/graphql',
   cache: new InMemoryCache(),
+  headers: {
+    Authorization: `Bearer ${token}`,
+  }
 });
 
 const router = createBrowserRouter([
