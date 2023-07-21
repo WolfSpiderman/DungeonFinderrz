@@ -71,7 +71,7 @@ export const QUERY_GAME = gql`
       totalPlayers
       players {
         userId
-        player
+        player 
       }
       requests {
         userId

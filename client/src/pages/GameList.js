@@ -22,7 +22,8 @@ export default function GameList() {
     totalPlayers: 0,
   });
 
-  const handleAddGame = async () => {
+  const handleAddGame = async (e) => {
+    e.preventDefault();
     try {
       const { title, description, date, location, totalPlayers } = formValues;
 

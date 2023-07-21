@@ -77,8 +77,6 @@ export const ADD_GAME = gql`
       description
       date
       totalPlayers
-      players
-      requests
       slots
     }
   }

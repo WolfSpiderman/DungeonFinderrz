@@ -21,14 +21,12 @@ const gameSchema = new Schema(
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Request',
-                autopopulate: { select: 'name', match: { approved: true } },
             },
         ],
         requests: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Request',
-                autopopulate: { select: 'name', match: { approved: null } },
             },
         ],
         date: {

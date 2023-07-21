@@ -6,6 +6,16 @@ type Auth {
     user: User
   }
 
+  type Request {
+    _id: ID!
+    player: String!
+    role: String!
+    approved: Boolean
+    gameId: ID!
+    userId: ID!
+    game: String!
+ }
+
 type User {
     _id: ID!
     username: String!
@@ -26,16 +36,6 @@ type User {
     requests: [Request]
     date: String
     slots: Int
- }
-
- type Request {
-    _id: ID!
-    player: String!
-    role: String!
-    approved: Boolean
-    gameId: ID!
-    userId: ID!
-    game: String!
  }
 
  type Query {
