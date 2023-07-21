@@ -68,8 +68,8 @@ const resolvers = {
               game: game.title
             });
     
-            user.attendedGames.push(request._id);
-            await user.save();
+            // user.attendedGames.push(request._id);
+            // await user.save();
 
             game.requests.push(request._id);
             await game.save();

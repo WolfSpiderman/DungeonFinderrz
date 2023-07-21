@@ -12,8 +12,8 @@ type User {
     email: String!
     password: String!
     attendedGames: [Request]
-    reliabilityRating: Float
-    gameCount: Int
+#     reliabilityRating: Float
+#     gameCount: Int
 }
  
  type Game {
