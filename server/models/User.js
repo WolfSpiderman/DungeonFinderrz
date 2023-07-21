@@ -18,18 +18,18 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    attendedGames: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Request',
-      },
-    ],
-    reliabilityRating: {
-      type: Number,
-      min: 0,
-      max: 5,
-      default: 0,
-    },
+    // attendedGames: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Request',
+    //   },
+    // ],
+    // reliabilityRating: {
+    //   type: Number,
+    //   min: 0,
+    //   max: 5,
+    //   default: 0,
+    // },
   },
   {
     toJSON: {
@@ -37,6 +37,7 @@ const userSchema = new Schema(
     },
   }
 );
+
 
 userSchema.pre('save', async function (next) {
     if (this.isNew || this.isModified('password')) {
@@ -51,9 +52,9 @@ userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
   };
 
-  userSchema.virtual('gameCount').get(function () {
-    return this.attendedGames.length;
-  });
+  // userSchema.virtual('gameCount').get(function () {
+  //   return this.attendedGames.length;
+  // });
   
   const User = model('User', userSchema);
   
