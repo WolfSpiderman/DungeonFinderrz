@@ -12,7 +12,7 @@ type User {
     email: String!
     password: String!
     attendedGames: [Request]
-    reliabilityRating: Float
+    reliabilityRating: Int
     gameCount: Int
 }
  
