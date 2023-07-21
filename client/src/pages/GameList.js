@@ -62,27 +62,25 @@ export default function GameList() {
             <p>No games found.</p>
           ) : (
             <ul>
-              {gameList.map((game) => {
-                return (
-                  <GameCard
-                    className="gameCard"
-                    key={game._id}
-                    id={game._id}
-                    title={game.title}
-                    location={game.location}
-                    date={game.date}
-                    slots={game.slots}
-                    players={game.players}
-                  />
-                );
-              })}
+              {gameList.map((game) => (
+                <GameCard
+                  className="gameCard"
+                  key={game._id}
+                  id={game._id}
+                  title={game.title}
+                  location={game.location}
+                  date={game.date}
+                  slots={game.slots}
+                  players={game.players}
+                />
+              ))}
             </ul>
           )}
           {AuthService.loggedIn() && (
             <button onClick={() => setShowFormModal(true)}>Add Game</button>
           )}
           {showFormModal && (
-            <div className="modal">
+            <div className={`gameModal ${showFormModal ? "show-modal" : ""}`}>
               <form onSubmit={handleAddGame}>
                 <div>
                   <label htmlFor="gameName">Game Name:</label>
@@ -108,6 +106,48 @@ export default function GameList() {
                       setFormValues({
                         ...formValues,
                         totalPlayers: parseInt(e.target.value),
+                      })
+                    }
+                  />
+                </div>
+                <div>
+                  <label htmlFor="location">Location:</label>
+                  <input
+                    type="text"
+                    id="location"
+                    value={formValues.location}
+                    onChange={(e) =>
+                      setFormValues({
+                        ...formValues,
+                        location: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div>
+                  <label htmlFor="date">Date:</label>
+                  <input
+                    type="date"
+                    id="date"
+                    value={formValues.date}
+                    onChange={(e) =>
+                      setFormValues({
+                        ...formValues,
+                        date: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div>
+                  <label htmlFor="slots">Slots:</label>
+                  <input
+                    type="number"
+                    id="slots"
+                    value={formValues.slots}
+                    onChange={(e) =>
+                      setFormValues({
+                        ...formValues,
+                        slots: parseInt(e.target.value),
                       })
                     }
                   />
