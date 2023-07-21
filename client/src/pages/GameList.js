@@ -22,7 +22,8 @@ export default function GameList() {
     totalPlayers: 0,
   });
 
-  const handleAddGame = async () => {
+  const handleAddGame = async (e) => {
+    e.preventDefault();
     try {
       const { title, description, date, location, totalPlayers } = formValues;
 
@@ -139,11 +140,11 @@ export default function GameList() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="slots">Slots:</label>
+                  <label htmlFor="slots">Description(optional):</label>
                   <input
-                    type="number"
-                    id="slots"
-                    value={formValues.slots}
+                    type="text"
+                    id="description"
+                    value={formValues.description}
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,

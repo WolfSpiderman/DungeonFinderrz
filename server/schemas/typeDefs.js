@@ -6,6 +6,16 @@ type Auth {
     user: User
   }
 
+  type Request {
+    _id: ID!
+    player: String!
+    role: String!
+    approved: Boolean
+    gameId: ID!
+    userId: ID!
+    game: String!
+ }
+
 type User {
     _id: ID!
     username: String!
@@ -28,16 +38,6 @@ type User {
     slots: Int
  }
 
- type Request {
-    _id: ID!
-    player: String!
-    role: String!
-    approved: Boolean
-    gameId: ID!
-    userId: ID!
-    game: String!
- }
-
  type Query {
     users: [User]
     games: [Game]
@@ -55,7 +55,7 @@ type User {
    addRequest(userId: ID!, gameId: ID!, role: String!): Request
    approveRequest(requestId: ID!): Request
    denyRequest(requestId: ID!): Request
-   updateProfile: Auth
+   # updateProfile: Auth
  }
 `
 
