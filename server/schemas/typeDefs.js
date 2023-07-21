@@ -55,7 +55,7 @@ type User {
    addRequest(userId: ID!, gameId: ID!, role: String!): Request
    approveRequest(requestId: ID!): Request
    denyRequest(requestId: ID!): Request
-   updateProfile: Auth
+   # updateProfile: Auth
  }
 `
 

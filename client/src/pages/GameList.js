@@ -139,11 +139,11 @@ export default function GameList() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="slots">Slots:</label>
+                  <label htmlFor="slots">Description(optional):</label>
                   <input
-                    type="number"
-                    id="slots"
-                    value={formValues.slots}
+                    type="text"
+                    id="description"
+                    value={formValues.description}
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,
