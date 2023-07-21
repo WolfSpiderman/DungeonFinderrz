@@ -69,8 +69,14 @@ export const QUERY_GAME = gql`
       description
       date
       totalPlayers
-      players
-      requests
+      players {
+        userId
+        player
+      }
+      requests {
+        userId
+        player
+      }
       slots
     }
   }
