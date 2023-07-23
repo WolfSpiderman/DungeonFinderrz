@@ -20,20 +20,11 @@ export const QUERY_USERS = gql`
 `;
 
 export const QUERY_USER = gql`
-  query user($id: ID!) {
-    user(id: $id) {
+  query user($userId: ID!) {
+    user(id: $userId) {
       _id
       username
       email
-      requests {
-        _id
-        player
-        role
-        approved
-        game
-        gameId
-        userId
-      }
     }
   }
 `;

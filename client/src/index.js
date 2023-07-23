@@ -4,24 +4,36 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom"
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from "@apollo/client/link/context";
+
 import './index.css';
 import Root from './pages/Root';
 import ErrorPage from './pages/ErrorPage';
 import Home, { loader as homeLoader } from './pages/Home';
 import GameList from './pages/GameList';
-import Profile from './pages/Profile';
+import Profile, { loader as profileLoader } from './pages/Profile';
 import GamePage from './pages/GamePage';
-import Auth from './utils/auth';
 
-const token = Auth.getToken() || null;
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('id_token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
 
 const client = new ApolloClient({
-  uri: '/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
-  headers: {
-    Authorization: `Bearer ${token}`,
-  }
 });
 
 const router = createBrowserRouter([
@@ -48,7 +60,8 @@ const router = createBrowserRouter([
           },
           {
             path: "profile",
-            element: <Profile />
+            element: <Profile />,
+            loader: profileLoader,
           },
         ],
       },

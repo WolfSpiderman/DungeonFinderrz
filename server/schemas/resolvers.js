@@ -5,10 +5,10 @@ const { AuthenticationError } = require('apollo-server-express');
 const resolvers = {
     Query: {
         users: async () => {
-          return await User.find({}).populate('requests')
+          return await User.find({})
         },
         user: async (parent, { id }) => {
-          return await User.findById(id).populate('requests')
+          return await User.findById(id)
         },
         games: async () => {
           return await Game.find({})
@@ -43,7 +43,7 @@ const resolvers = {
           }
     
           const token = signToken(user);
-    
+
           return { token, user };
         },
         addRequest: async (parent, { userId, gameId, role }) => {
@@ -171,22 +171,22 @@ const resolvers = {
           return game;
         }
       },
-      User: {
-        attendedGames: async (parent) => {
-          try {
-            // Fetch the user's attended games and populate the 'requests' field.
-            const user = await User.findById(parent._id).populate('requests');
+      // User: {
+      //   attendedGames: async (parent) => {
+      //     try {
+      //       // Fetch the user's attended games and populate the 'requests' field.
+      //       const user = await User.findById(parent._id).populate('requests');
             
-            // Return the 'requests' field 
-            if (user) {
-              return user.requests;
-            }
-            return [];
-          } catch (error) {
-            throw new Error('Unable to fetch attended games');
-          }
-        },
-      },
+      //       // Return the 'requests' field 
+      //       if (user) {
+      //         return user.requests;
+      //       }
+      //       return [];
+      //     } catch (error) {
+      //       throw new Error('Unable to fetch attended games');
+      //     }
+      //   },
+      // },
       
   };
 

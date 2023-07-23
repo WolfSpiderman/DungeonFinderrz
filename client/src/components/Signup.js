@@ -14,10 +14,7 @@ function Signup() {
         variables: { ...formState },
       });
 
-      AuthService.login(data.addUser.token);
-      const { token, user } = data.addUser;
-      console.log(user);
-      AuthService.login(token);
+      AuthService.login(data.addUser.token, data.addUser.user._id);
     } catch (e) {
       console.error(e);
     }

@@ -18,7 +18,7 @@ function Login() {
         variables: { ...formState },
       });
 
-      AuthService.login(data.login.token);
+      AuthService.login(data.login.token, data.login.user._id);
     } catch (e) {
       console.error(e);
     }
