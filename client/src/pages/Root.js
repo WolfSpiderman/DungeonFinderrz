@@ -17,10 +17,10 @@ export default function Root(props) {
       navigate("/");
     }
   };
-  
+
   return (
     <div>
-      <header style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", marginBottom: 40, height: 200, backgroundImage: `url(${process.env.PUBLIC_URL}/images/blueScales.jpg)` }}>
+      <header style={{ marginBottom: 40, backgroundImage: `url(${process.env.PUBLIC_URL}/images/blueScales.jpg)` }}>
         <h1 style={{ fontSize: 72, color: "#a50308" }}>Dungeon Finderrz</h1>
         <nav>
         <NavLink
