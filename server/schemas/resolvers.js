@@ -51,70 +51,59 @@ const resolvers = {
           return { token, user };
         },
         addRequest: async (parent, { userId, gameId, role }) => {
-          try {
-            const user = await User.findById(userId);
-            const game = await Game.findById(gameId);
-    
-            console.log(user);
-            console.log(game);
-            if (!user) {
-              throw new Error('User not found');
-            }
-    
-            if (!game) {
-              throw new Error('Game not found');
-            }
-    
-            const request = Request.create({
-              player: user.username,
-              role: role,
-              approved: null,
-              game: game.title,
-              gameId: gameId,
-              userId: userId
-            });
+      try {
+        const user = await User.findById(userId);
+        const game = await Game.findById(gameId);
 
-            // user.attendedGames.push(request._id);
-            // await user.save();
+        console.log(user);
+        console.log(game);
+        if (!user) {
+          throw new Error('User not found');
+        }
 
-            game.requests.push((await request)._id);
-            await game.save();
-    
-            return request;
-          } catch (error) {
-            throw new Error(error.message);
-          }
-        },
+        if (!game) {
+          throw new Error('Game not found');
+        }
+
+        const request = Request.create({
+          player: user.username,
+          role: role,
+          approved: null,
+          game: game.title,
+          gameId: gameId,
+          userId: userId
+        });
+
+        // user.attendedGames.push(request._id);
+        // await user.save();
+
+        game.requests.push((await request)._id);
+        await game.save();
+        await game.populate('requests'); // Populate requests array
+
+        return request;
+      } catch (error) {
+        throw new Error(error.message);
+      }
+    },
         approveRequest: async (parent, { requestId }) => {
           try {
             const request = await Request.findById(requestId);
-        
+
             if (!request) {
               throw new Error('Request not found');
             }
-        
-            if (request.approved) {
-              throw new Error('Request has already been approved');
-            }
-        
+
             request.approved = true;
-            
-            const user = await User.findById(request.userId);
-            const game = await Game.findById(request.gameId);
-        
-            if (!user) {
-              throw new Error('User not found');
-            }
-        
-            if (!game) {
-              throw new Error('Game not found');
-            }
-        
-            game.players.push(user._id);
-        
-            await Promise.all([request.save(), game.save()]);
-        
-            return request;
+            await request.save();
+
+            const game = await Game.findOneAndUpdate(
+              { _id: request.game },
+              { $push: { players: request } }, 
+              { new: true }
+            ).populate('players');
+
+            return game;
           } catch (error) {
             throw new Error(error.message);
           }
