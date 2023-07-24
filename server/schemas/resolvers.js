@@ -89,21 +89,33 @@ const resolvers = {
         approveRequest: async (parent, { requestId }) => {
           try {
             const request = await Request.findById(requestId);
-
+        
             if (!request) {
               throw new Error('Request not found');
             }
-
+        
+            if (request.approved) {
+              throw new Error('Request has already been approved');
+            }
+        
             request.approved = true;
-            await request.save();
-
-            const game = await Game.findOneAndUpdate(
-              { _id: request.game },
-              { $push: { players: request } }, 
-              { new: true }
-            ).populate('players');
-
-            return game;
+            
+            const user = await User.findById(request.userId);
+            const game = await Game.findById(request.gameId);
+        
+            if (!user) {
+              throw new Error('User not found');
+            }
+        
+            if (!game) {
+              throw new Error('Game not found');
+            }
+        
+            game.players.push(user._id);
+        
+            await Promise.all([request.save(), game.save()]);
+        
+            return request;
           } catch (error) {
             throw new Error(error.message);
           }
