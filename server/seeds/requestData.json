@@ -1,0 +1,43 @@
+[
+  {
+    "_id": "8af9324cb7d685be978733ab",
+    "userId": "5e1a0651741b255ddda996c1",
+    "gameId": "da2f7f4f7601dcdddbd0603e",
+    "approved": true,
+    "game": "game 1",
+    "player": "user1",
+    "role": "dm"
+  },
+  {
+    "_id": "5e00e9d9ad68b83aa8c17216",
+    "userId": "5e1a0651741b255ddda996c2",
+    "gameId": "da2f7f4f7601dcdddbd0603e",
+    "game": "game 1",
+    "player": "user2",
+    "role": "barbarian"
+  },
+  {
+    "_id": "3a9546d825b040c8ec539967",
+    "userId": "5e1a0651741b255ddda996c4",
+    "gameId": "12fe76f3cfe2eafdab2d2d49",
+    "game": "game 2",
+    "player": "user4",
+    "role": "dm"
+  },
+  {
+    "_id": "fd2897c30a74c4f6c7dc933f",
+    "userId": "5e1a0651741b255ddda996c2",
+    "gameId": "12fe76f3cfe2eafdab2d2d49",
+    "game": "game 2",
+    "player": "user2",
+    "role": "wizard"
+  },
+  {
+    "_id": "dc3611527cd28470e9e9871c",
+    "userId": "5e1a0651741b255ddda996c2",
+    "gameId": "f13f95c7d3b5c9787d51603b",
+    "game": "game 3",
+    "player": "user2",
+    "role": "dm"
+  }
+]
