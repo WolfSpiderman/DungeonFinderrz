@@ -78,7 +78,7 @@ export const ADD_GAME = gql`
       date
       totalPlayers
       slots
-      madeBy
+      # madeBy
     }
   }
 `;

@@ -11,16 +11,20 @@ const resolvers = {
           return await User.findById(id).populate('requests')
         },
         games: async () => {
-          return await Game.find({})
+          return await Game.find({}).populate('players').populate('requests')
         },
         game: async (parent, { id }) => {
-          return await Game.findById(id)
+          return await Game.findById(id).populate('players').populate('requests')
         },        
         requests: async () => {
-          return await Request.find({})
+          return (await Request.find({})).populate('games')
         },
         request: async (parent, { id }) => {
           return await Request.findById(id).populate('games')
+        },
+        checkRequestExists: async (parent, { gameId, userId }) => {
+          const existingRequest = await Request.findOne({ gameId, userId });
+          return !!existingRequest;
         }
     },
     Mutation: {
@@ -149,7 +153,7 @@ const resolvers = {
         },
         addGame: async (parent, { title, location, description, date, totalPlayers }, context) => {
           // Assuming you have a way to get the authenticated user's ID from the context
-          const madeBy = context.userId;
+          // const madeBy = context.userId;
         
           const newGame = await Game.create({
             title,
@@ -159,7 +163,7 @@ const resolvers = {
             totalPlayers,
             players: [],
             requests: [],
-            madeBy,
+            // madeBy,
           });
         
           return newGame;

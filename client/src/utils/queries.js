@@ -129,3 +129,9 @@ export const QUERY_REQUEST = gql`
     }
   }
 `;
+
+export const CHECK_REQUEST_EXISTS = gql`
+  query CheckRequestExists($gameId: ID!, $userId: ID!) {
+    checkRequestExists(gameId: $gameId, userId: $userId)
+  }
+`;
