@@ -11,10 +11,26 @@ const resolvers = {
           return await User.findById(id)
         },
         games: async () => {
-          return await Game.find({})
+          return await Game
+            .find({})
+            .populate("players")
+            .populate({
+              path: "requests",
+              populate : {
+                path : "userId"
+              }
+            })
         },
         game: async (parent, { id }) => {
-          return await Game.findById(id)
+          return await Game
+            .findById(id)
+            .populate("players")
+            .populate({
+              path: "requests",
+              populate : {
+                path : "userId"
+              }
+            })
         },        
         requests: async () => {
           return await Request.find({})
@@ -147,13 +163,13 @@ const resolvers = {
             throw new Error(error.message);
           }
         },
-        addGame: (parent, { title, location, description, date, totalPlayers }) => {
+        addGame: (parent, { title, location, description, date, maxPlayers }) => {
           const newGame = Game.create({
             title,
             location,
             description,
             date,
-            totalPlayers,
+            maxPlayers,
             players: [],
             requests: [],
             slots: 0

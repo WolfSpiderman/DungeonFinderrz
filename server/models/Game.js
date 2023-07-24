@@ -14,14 +14,14 @@ const gameSchema = new Schema(
         description: {
             type: String,
         },
-        totalPlayers: {
+        maxPlayers: {
             type: Number,
             required: true,
         },
         players: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Request',
+                ref: 'User',
             },
         ],
         requests: [
@@ -43,7 +43,7 @@ const gameSchema = new Schema(
 );
 
 gameSchema.virtual('slots').get(function () {
-    return this.totalPlayers - this.players.length;
+    return this.maxPlayers - this.players.length;
 });
 
 const Game = model('Game', gameSchema);

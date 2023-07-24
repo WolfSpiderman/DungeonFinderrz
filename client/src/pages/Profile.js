@@ -13,11 +13,13 @@ export async function loader() {
 
 export default function Profile() {
   const userId = localStorage.getItem("user_id");
+  console.log(userId);
 
   const { loading, error, data } = useQuery(QUERY_USER,
     {
       variables: { userId }
-  });
+    }
+  );
 
   
 

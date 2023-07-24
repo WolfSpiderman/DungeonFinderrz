@@ -8,12 +8,11 @@ type Auth {
 
   type Request {
     _id: ID!
-    player: String!
-    role: String!
-    approved: Boolean
+    userId: User
     gameId: ID!
-    userId: ID!
-    game: String!
+    status: String
+    role: String
+    class: String
  }
 
 type User {
@@ -31,8 +30,8 @@ type User {
     title: String!
     location: String!
     description: String
-    totalPlayers: Int!
-    players: [Request]
+    maxPlayers: Int!
+    players: [User]
     requests: [Request]
     date: String
     slots: Int
@@ -41,7 +40,7 @@ type User {
  type Query {
     users: [User]
     games: [Game]
-    requests:[Request]
+    requests: [Request]
     user(id: ID!): User
     game(id: ID!): Game
     request(id: ID!): Request
@@ -50,7 +49,7 @@ type User {
  type Mutation {
    addUser(username: String!, email: String!, password: String!): Auth
    login(email: String!, password: String!): Auth
-   addGame(title: String!, location: String!, description: String, date: String!, totalPlayers: Int!): Game
+   addGame(title: String!, location: String!, description: String, date: String!, maxPlayers: Int!): Game
    removeGame(_id: ID!): Game
    addRequest(userId: ID!, gameId: ID!, role: String!): Request
    approveRequest(requestId: ID!): Request

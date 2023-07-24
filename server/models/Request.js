@@ -1,18 +1,6 @@
 const { Schema, model } = require('mongoose');
 
 const requestSchema = new Schema({
-    player: {
-        type: String,
-        required: true
-    },
-    role: {
-        type: String,
-        required: true
-    },
-    approved: {
-        type: Boolean,
-        default: null
-    },
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -23,9 +11,17 @@ const requestSchema = new Schema({
         ref: 'Game',
         required: true
     },
-    game: {
+    status: {
         type: String,
-        required: true
+        enum: ['pending', 'approved', 'rejected'],
+        default: 'pending'
+    },
+    role: {
+        type: String,
+        enum: ['DM', 'player'],
+    },
+    class: {
+        type: String,
     }
 },
 {

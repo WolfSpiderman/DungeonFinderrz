@@ -69,14 +69,14 @@ export const DENY_REQUEST = gql`
 `;
 
 export const ADD_GAME = gql`
-  mutation addGame($title: String!, $location: String!, $description: String!, $date: String!, $totalPlayers: Int!) {
-    addGame(title: $title, location: $location, description: $description, date: $date, totalPlayers: $totalPlayers) {
+  mutation addGame($title: String!, $location: String!, $description: String!, $date: String!, $maxPlayers: Int!) {
+    addGame(title: $title, location: $location, description: $description, date: $date, maxPlayers: $maxPlayers) {
       _id
       title
       location
       description
       date
-      totalPlayers
+      maxPlayers
       slots
     }
   }
@@ -90,7 +90,7 @@ export const REMOVE_GAME = gql`
       location
       description
       date
-      totalPlayers
+      maxPlayers
       players
       requests
       slots

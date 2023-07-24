@@ -19,13 +19,13 @@ export default function GameList() {
     description: "",
     date: "",
     location: "",
-    totalPlayers: 0,
+    maxPlayers: 0,
   });
 
   const handleAddGame = async (e) => {
     e.preventDefault();
     try {
-      const { title, description, date, location, totalPlayers } = formValues;
+      const { title, description, date, location, maxPlayers } = formValues;
 
       await addGame({
         variables: {
@@ -33,7 +33,7 @@ export default function GameList() {
           description,
           date,
           location,
-          totalPlayers,
+          maxPlayers,
         },
         refetchQueries: [{ query: QUERY_GAMES }], // Refetch the games after adding a new game
       });
@@ -43,7 +43,7 @@ export default function GameList() {
         description: "",
         date: "",
         location: "",
-        totalPlayers: 0,
+        maxPlayers: 0,
       });
 
       setShowFormModal(false);
@@ -71,6 +71,7 @@ export default function GameList() {
                   title={game.title}
                   location={game.location}
                   date={game.date}
+                  maxPlayers={game.maxPlayers}
                   slots={game.slots}
                   players={game.players}
                 />
@@ -98,15 +99,15 @@ export default function GameList() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="totalPlayers">Total Players:</label>
+                  <label htmlFor="maxPlayers">Max Number of Participants (includes DM):</label>
                   <input
                     type="number"
-                    id="totalPlayers"
-                    value={formValues.totalPlayers}
+                    id="maxPlayers"
+                    value={formValues.maxPlayers}
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,
-                        totalPlayers: parseInt(e.target.value),
+                        maxPlayers: parseInt(e.target.value),
                       })
                     }
                   />

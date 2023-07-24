@@ -8,12 +8,11 @@ export const QUERY_USERS = gql`
       email
       requests {
         _id
-        player
-        role
-        approved
-        game
-        gameId
         userId
+        gameId
+        status
+        role
+        class
       }
     }
   }
@@ -37,14 +36,12 @@ export const QUERY_GAMES = gql`
       location
       description
       date
-      totalPlayers
+      maxPlayers
       players {
-        userId
-        player
+        _id
       }
       requests {
-        userId
-        player
+        _id
       }
       slots
     }
@@ -52,21 +49,27 @@ export const QUERY_GAMES = gql`
 `;
 
 export const QUERY_GAME = gql`
-  query game($id: ID!) {
-    game(id: $id) {
+  query game($gameId: ID!) {
+    game(id: $gameId) {
       _id
       title
       location
       description
       date
-      totalPlayers
+      maxPlayers
       players {
-        userId
-        player 
+        _id
+        username
       }
       requests {
-        userId
-        player
+        _id
+        userId {
+          _id
+          username
+        }
+        role
+        class
+        status
       }
       slots
     }
@@ -77,12 +80,11 @@ export const QUERY_REQUESTS = gql`
   query requests {
     requests {
       _id
-      player
-      role
-      approved
-      game
-      gameId
       userId
+      gameId
+      status
+      role
+      class
     }
   }
 `;
@@ -91,12 +93,11 @@ export const QUERY_REQUEST = gql`
   query request($id: ID!) {
     request(id: $id) {
       _id
-      player
-      role
-      approved
-      game
-      gameId
       userId
+      gameId
+      status
+      role
+      class
     }
   }
 `;
