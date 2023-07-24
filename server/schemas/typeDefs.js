@@ -40,7 +40,8 @@ type User {
  type Query {
     users: [User]
     games: [Game]
-    requests: [Request]
+    requests:[Request]
+    checkRequestExists(gameId: ID!, userId: ID!): Boolean!
     user(id: ID!): User
     game(id: ID!): Game
     request(id: ID!): Request

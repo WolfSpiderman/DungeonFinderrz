@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const requestSchema = require('./Request');
 const dateFormat = require('../utils/dateFormat');
 
 const gameSchema = new Schema(
@@ -27,14 +28,19 @@ const gameSchema = new Schema(
         requests: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Request',
-            },
+                ref: 'Request'
+            }
         ],
         date: {
             type: Date,
             default: Date.now(),
             get: (timestamp) => dateFormat(timestamp),
         },
+        // madeBy: {
+        //   type: Schema.Types.ObjectId,
+        //   ref: 'User',
+        //   required: true,
+        // }
     },
     {
         toJSON: { virtuals: true },

@@ -43,6 +43,7 @@ export const QUERY_GAMES = gql`
       requests {
         _id
       }
+      date
       slots
     }
   }
@@ -71,6 +72,7 @@ export const QUERY_GAME = gql`
         class
         status
       }
+      date
       slots
     }
   }
@@ -99,5 +101,11 @@ export const QUERY_REQUEST = gql`
       role
       class
     }
+  }
+`;
+
+export const CHECK_REQUEST_EXISTS = gql`
+  query CheckRequestExists($gameId: ID!, $userId: ID!) {
+    checkRequestExists(gameId: $gameId, userId: $userId)
   }
 `;

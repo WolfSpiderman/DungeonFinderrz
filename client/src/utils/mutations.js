@@ -78,9 +78,11 @@ export const ADD_GAME = gql`
       date
       maxPlayers
       slots
+      # madeBy
     }
   }
 `;
+
 
 export const REMOVE_GAME = gql`
   mutation removeGame($id: ID!) {
