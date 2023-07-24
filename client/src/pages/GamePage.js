@@ -28,12 +28,12 @@ export default function GamePage() {
   const [approveRequest] = useMutation(APPROVE_REQUEST);
   const [denyRequest] = useMutation(DENY_REQUEST);
 
-  // const DM = gameInfo.players.find(player => player.DM === true);
+  const DM = gameInfo?.players?.find(player => player.role === "dm");
 
-  const playerList = gameInfo?.players?.filter(player => player.DM === false || null).map((player) => (
+  const playerList = gameInfo?.players?.filter(player => player.role !== "dm").map((player) => (
     <tr>
-      <td>{player.username}</td>
-      <td>{player.class}</td>
+      <td>{player.player}</td>
+      <td>{player.role}</td>
     </tr>
   ));
 
@@ -140,6 +140,17 @@ export default function GamePage() {
                 </tr>
               </thead>
               <tbody>
+                {DM ? (
+                  <tr>
+                    <td>{DM.player}</td>
+                    <td>DM</td>
+                  </tr>
+                ) : (
+                  <tr>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                  </tr>
+                )}
                 {playerList}
               </tbody>
             </table>
