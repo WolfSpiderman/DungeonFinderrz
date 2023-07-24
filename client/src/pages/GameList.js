@@ -58,7 +58,7 @@ export default function GameList() {
       {loading ? (
         <p>Loading games...</p>
       ) : (
-        <div>
+        <div className="GameList">
           {gameList.length === 0 ? (
             <p>No games found.</p>
           ) : (

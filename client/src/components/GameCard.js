@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Auth from "../utils/auth";
+import '../pages/GameList.css';
 
 export default function GameCard(props) {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function GameCard(props) {
   };
 
   return (
-    <li>
+    <li className="gameCard">
       <a href={`/games/${props.id}`} onClick={handleClick}>
         <p>{props.title}</p>
         <p>{props.location}</p>

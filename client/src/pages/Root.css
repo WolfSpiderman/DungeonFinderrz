@@ -5,27 +5,30 @@ a {
 
 main {
     min-height: 40vh;
+    text-align: center;
 }
 
 header {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    height: 200px;
-  }
-  
-  header h1 {
-    font-size: 72px;
-    color: #a50308;
-  }
-  
-  nav {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 10px 20px;
-    border-radius: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 200px;
+}
+
+header h1 {
+  font-size: 72px;
+  color: #a50308;
+  margin-bottom: 10px;
+}
+
+nav {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin-top: 10px; 
+}
   
   nav a {
     margin: 0 15px;
@@ -57,5 +60,12 @@ footer a {
 @media (min-width: 992px) {
   header, footer {
     padding: 1rem 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    height: 267px;
+    text-align: center;
   }
 }
