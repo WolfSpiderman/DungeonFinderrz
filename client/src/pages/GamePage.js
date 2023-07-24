@@ -162,7 +162,7 @@ export default function GamePage() {
               <div className="modal-content">
                 <span id="close-request-modal" className="close" onClick={handleCloseBtnClick}>&times;</span>
                 {errorMessage && <p>{errorMessage}</p>}
-                <p>The form in this modal is currently non-functional</p>
+                <p>Which class would you like to join this campaign as?</p>
                 <form>
                   <div>
                     <label htmlFor="pref-class">Choose Preferred Class:</label>

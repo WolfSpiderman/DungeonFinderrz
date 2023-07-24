@@ -140,7 +140,7 @@ export default function GameList() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="slots">Description(optional):</label>
+                  <label htmlFor="description">Description(optional):</label>
                   <input
                     type="text"
                     id="description"
@@ -148,7 +148,7 @@ export default function GameList() {
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,
-                        slots: parseInt(e.target.value),
+                        description: e.target.value,
                       })
                     }
                   />
