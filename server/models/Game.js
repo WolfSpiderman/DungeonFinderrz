@@ -35,6 +35,11 @@ const gameSchema = new Schema(
             default: Date.now(),
             get: (timestamp) => dateFormat(timestamp),
         },
+        madeBy: {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+          required: true,
+        }
     },
     {
         toJSON: { virtuals: true },

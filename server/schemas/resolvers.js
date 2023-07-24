@@ -147,8 +147,11 @@ const resolvers = {
             throw new Error(error.message);
           }
         },
-        addGame: (parent, { title, location, description, date, totalPlayers }) => {
-          const newGame = Game.create({
+        addGame: async (parent, { title, location, description, date, totalPlayers }, context) => {
+          // Assuming you have a way to get the authenticated user's ID from the context
+          const madeBy = context.userId;
+        
+          const newGame = await Game.create({
             title,
             location,
             description,
@@ -156,9 +159,9 @@ const resolvers = {
             totalPlayers,
             players: [],
             requests: [],
-            slots: 0
+            madeBy,
           });
-    
+        
           return newGame;
         },
         removeGame: async (parent, { id }) => {
