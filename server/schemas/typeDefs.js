@@ -27,21 +27,23 @@ type User {
 }
  
  type Game {
-    _id: ID!
-    title: String!
-    location: String!
-    description: String
-    totalPlayers: Int!
-    players: [Request]
-    requests: [Request]
-    date: String
-    slots: Int
+   _id: ID!
+   title: String!
+   location: String!
+   description: String
+   totalPlayers: Int!
+   players: [Request]
+   requests: [Request]
+   date: String
+   slots: Int
+   # madeBy: User!
  }
 
  type Query {
     users: [User]
     games: [Game]
     requests:[Request]
+    checkRequestExists(gameId: ID!, userId: ID!): Boolean!
     user(id: ID!): User
     game(id: ID!): Game
     request(id: ID!): Request

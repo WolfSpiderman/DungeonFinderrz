@@ -45,16 +45,26 @@ export const QUERY_GAMES = gql`
       title
       location
       description
-      date
       totalPlayers
       players {
-        userId
+        _id
         player
+        role
+        approved
+        gameId
+        userId
+        game
       }
       requests {
-        userId
+        _id
         player
+        role
+        approved
+        gameId
+        userId
+        game
       }
+      date
       slots
     }
   }
@@ -67,16 +77,26 @@ export const QUERY_GAME = gql`
       title
       location
       description
-      date
       totalPlayers
       players {
+        _id
+        player
+        role
+        approved
+        gameId
         userId
-        player 
+        game
       }
       requests {
-        userId
+        _id
         player
+        role
+        approved
+        gameId
+        userId
+        game
       }
+      date
       slots
     }
   }
@@ -107,5 +127,11 @@ export const QUERY_REQUEST = gql`
       gameId
       userId
     }
+  }
+`;
+
+export const CHECK_REQUEST_EXISTS = gql`
+  query CheckRequestExists($gameId: ID!, $userId: ID!) {
+    checkRequestExists(gameId: $gameId, userId: $userId)
   }
 `;

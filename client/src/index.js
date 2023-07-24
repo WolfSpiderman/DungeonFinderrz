@@ -4,7 +4,8 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom"
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import './index.css';
 import Root from './pages/Root';
 import ErrorPage from './pages/ErrorPage';
@@ -14,15 +15,25 @@ import Profile from './pages/Profile';
 import GamePage from './pages/GamePage';
 import Auth from './utils/auth';
 
-const token = Auth.getToken() || null;
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = Auth.getToken();
+  return {
+    headers: {
+      ...headers,
+      Authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
 
 const client = new ApolloClient({
-  uri: '/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
-  headers: {
-    Authorization: `Bearer ${token}`,
-  }
 });
+
 
 const router = createBrowserRouter([
   {
