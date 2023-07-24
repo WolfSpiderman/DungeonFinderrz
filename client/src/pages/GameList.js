@@ -82,8 +82,9 @@ export default function GameList() {
           )}
           {showFormModal && (
             <div className={`gameModal ${showFormModal ? "show-modal" : ""}`}>
+              <span className="close" onClick={() => setShowFormModal(false)}>&times;</span>
               <form onSubmit={handleAddGame}>
-                <div>
+              <div>
                   <label htmlFor="gameName">Game Name:</label>
                   <input
                     type="text"
