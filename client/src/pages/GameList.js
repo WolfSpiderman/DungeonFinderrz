@@ -82,8 +82,9 @@ export default function GameList() {
           )}
           {showFormModal && (
             <div className={`gameModal ${showFormModal ? "show-modal" : ""}`}>
+              <span className="close" onClick={() => setShowFormModal(false)}>&times;</span>
               <form onSubmit={handleAddGame}>
-                <div>
+              <div>
                   <label htmlFor="gameName">Game Name:</label>
                   <input
                     type="text"
@@ -140,7 +141,7 @@ export default function GameList() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="slots">Description(optional):</label>
+                  <label htmlFor="description">Description(optional):</label>
                   <input
                     type="text"
                     id="description"
@@ -148,7 +149,7 @@ export default function GameList() {
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,
-                        slots: parseInt(e.target.value),
+                        description: e.target.value,
                       })
                     }
                   />
