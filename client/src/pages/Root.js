@@ -1,7 +1,5 @@
 import { Outlet, NavLink, useNavigate } from "react-router-dom";
 import React from 'react';
-import { BiLogoGithub, BiLogoLinkedin } from 'react-icons/bi';
-import { FaStackOverflow } from 'react-icons/fa';
 import './Root.css';
 
 import AuthService from '../utils/auth';
@@ -52,16 +50,17 @@ export default function Root(props) {
         <Outlet />
       </main>
       <footer style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: 40, height: 200, backgroundImage: `url(${process.env.PUBLIC_URL}/images/blueScales.jpg)` }}>
-        <a href="https://github.com/WolfSpiderman" style={{ marginRight: 15 }}>
-          <BiLogoGithub style={{ minHeight: 100, minWidth: 100, color: '#a50308' }}/>
+        <a href={`https://github.com/JoelCupeles`}>
+          <img src={`https://img.shields.io/badge/GitHub-JoelCupeles-%23a50308`} alt="GitHub" />
         </a>
-
-        <a href="https://www.linkedin.com/in/joshua-jenkins-4960aa259" style={{ marginRight: 15 }}>
-          <BiLogoLinkedin style={{ minHeight: 100, minWidth: 100, color: '#a50308' }}/>
+        <a href={`https://github.com/jbowdle`}>
+          <img src={`https://img.shields.io/badge/GitHub-jbowdle-%23a50308`} alt="GitHub" />
         </a>
-
-        <a href="https://stackoverflow.com/users/22142526/joshua-jenkins">
-          <FaStackOverflow style={{ minHeight: 100, minWidth: 100, color: '#a50308' }} />
+        <a href={`https://github.com/blackshane`}>
+          <img src={`https://img.shields.io/badge/GitHub-blackshane-%23a50308`} alt="GitHub" />
+        </a>
+        <a href={`https://github.com/WolfSpiderman`}>
+          <img src={`https://img.shields.io/badge/GitHub-WolfSpiderman-%23a50308`} alt="GitHub" />
         </a>
       </footer>
     </div>
